@@ -1,17 +1,18 @@
+/**
+* Add a new row to the table and clean form values.
+*/
 function add() {
   let table = qs('table');
   let fields = qsa('.field');
 
-  insertData(table, fields);
-  clean();
+  insertData(fields, table);
+  clean('.field');
 }
 
-function toggleFormButtons() {
-  toggle('#add');
-  toggle('#save');
-}
-
-function insertData(table, fields) {
+/**
+* Insert data from the form fields to the table.
+*/
+function insertData(fields, table) {
   let row = table.insertRow(-1);
   let cells = [];
   fields.forEach(function (field, index) {
@@ -25,17 +26,29 @@ function insertData(table, fields) {
   cells[cells.length-1].append(createButton('Remove'));
 }
 
+/**
+* Create a button and bind a click event on it.
+*/
 function createButton(type) {
   let button = document.createElement('button');
+  let buttonFn = window[type.toLowerCase()];
   button.innerHTML = type;
-  button.onclick = window[type.toLowerCase()];
+  if (buttonFn) {
+    button.onclick = buttonFn;
+  }
   return button;
 }
 
+/**
+* Remove a row.
+*/
 function remove(event) {
   event.target.parentNode.parentNode.remove();
 }
 
+/**
+* Move values from selected table row to the form.
+*/
 function edit(event) {
   toggleFormButtons();
   qs('#row-index').value = event.target.parentNode.parentNode.rowIndex;
@@ -46,6 +59,17 @@ function edit(event) {
   });
 }
 
+/**
+* Toggle form buttons.
+*/
+function toggleFormButtons() {
+  toggle('#add');
+  toggle('#save');
+}
+
+/**
+* Save edited values for a row.
+*/
 function save() {
   let currentIndex = qs('#row-index').value;
   let row = qs('table').rows[currentIndex];
@@ -56,6 +80,6 @@ function save() {
     cells[index].innerHTML = field.value;
   });
 
-  clean();
+  clean('.field');
   toggleFormButtons();
 }
