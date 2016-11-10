@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Contacts - ULACIT - JavaScript and jQuery</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./styles/style.css" />
+</head>
+<body>
+  <div class="main">
+    <h1>Contacts</h1>
+    <div class="data-form">
+      <input class="field" type="text" placeholder="Name" name="name">
+      <input class="field" type="text" placeholder="Company" name="company">
+      <input class="field" type="text" placeholder="Phone" name="phone">
+      <input class="field" type="text" placeholder="Address" name="address">
+      <div class="btn-group">
+        <button id="add" onclick="add()">Add</button>
+        <button id="save" style="visibility: hidden;" onclick="save()">Save</button>
+      </div>
+      <input  id="row-index" type="hidden" name="editRow" value="" />
+    </div>
+
+    <table id="contacts">
+      <thead>
+        <td>Name</td>
+        <td>Company</td>
+        <td>Phone</td>
+        <td>Address</td>
+        <td>Edit</td>
+        <td>Remove</td>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+  </div>
+
+  <script src="./js/utilities.js"></script>
+  <script src="./js/script.js"></script>
+</body>
+</html>
